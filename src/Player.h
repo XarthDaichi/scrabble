@@ -13,7 +13,6 @@ private:
     char tiles[6];
 public:
     Player();
-    Player(char *tiles);
 
     const char *getTiles() const;
 

@@ -15,11 +15,9 @@ private:
     List<char>::listptr board[15][15];
     std::hash_map<std::string, std::string> dictionary;
     std::queue<Player> turn_order;
+    int tile_amount[6] = {9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1};
 public:
     Game();
-
-    Game(List<char>::listptr (*board)[15], const std::hash_map<std::string, std::string> &dictionary,
-         const std::queue<Player> &turnOrder);
 
     const std::hash_map<std::string, std::string> &getDictionary() const;
 
@@ -33,7 +31,17 @@ public:
 
     void parseDictionary(std::string file_name);
 
+    void start(int player_amount);
 
+    void end();
+
+    bool verify();
+
+    bool verify_right();
+
+    bool verify_left();
+
+    void draw_tiles(int amount);
 };
 
 
