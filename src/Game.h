@@ -9,11 +9,12 @@
 #include <queue>
 #include <hash_map>
 #include <ostream>
+#include <fstream>
 
 class Game {
 private:
     List<char>::listptr board[15][15];
-    std::hash_map<std::string, std::string> dictionary;
+    std::hash_map<std::string, std::string> dictionary; //FIXME Cambiar por "map"? equivalente en std, tiempo acceso/insersion = O(log n)
     std::queue<Player> turn_order;
 public:
     Game();
