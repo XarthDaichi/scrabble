@@ -2,6 +2,7 @@
 // Created by Xarthy on 0019 October 19, 2022.
 //
 
+#include <iostream>
 #include "Player.h"
 
 Player::Player() {
@@ -10,11 +11,19 @@ Player::Player() {
     }
 }
 
-const char *Player::getTiles() const {
+char *Player::getTiles() {
     return tiles;
 }
 
 std::ostream &operator<<(std::ostream &os, const Player &player) {
     os << "tiles: " << player.tiles;
     return os;
+}
+
+char Player::operator[](int position) {
+    try {
+        return tiles[position];
+    } catch (std::bad_alloc exception) {
+        std::clog << "Position is outside of vector length, enter a value between 0-5";
+    }
 }

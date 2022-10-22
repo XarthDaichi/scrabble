@@ -7,22 +7,30 @@
 #include "List.h"
 #include "Player.h"
 #include <queue>
-#include <hash_map>
+// Para verificar algunas cosas de los mapas usamos: https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/
+#include <map>
 #include <ostream>
 #include <fstream>
+#include <string>
+#include <sstream>
+
+// Consulted https://cplusplus.com/reference/cstdlib/rand/ for random
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 class Game {
 private:
-    List<char>::listptr board[15][15];
-    std::hash_map<std::string, std::string> dictionary; //FIXME Cambiar por "map"? equivalente en std, tiempo acceso/insersion = O(log n)
+    List<char>::listptr board[10][10];
+    std::map<std::string, bool> dictionary;
     std::queue<Player> turn_order;
-    int tile_amount[6] = {9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1};
+    int tile_amount[26] = {9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1};
 public:
     Game();
 
-    const std::hash_map<std::string, std::string> &getDictionary() const;
+    const std::map<std::string, bool> &getDictionary() const;
 
-    void setDictionary(const std::hash_map<std::string, std::string> &dictionary);
+    void setDictionary(const std::map<std::string, bool> &dictionary);
 
     const std::queue<Player> &getTurnOrder() const;
 
@@ -36,11 +44,9 @@ public:
 
     void end();
 
+    void turn();
+
     bool verify();
-
-    bool verify_right();
-
-    bool verify_left();
 
     void draw_tiles(int amount);
 };

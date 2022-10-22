@@ -4,16 +4,13 @@
 
 #include "Game.h"
 
-Game::Game(List<char>::listptr (*board)[15], const std::hash_map<std::string, std::string> &dictionary,
-           const std::queue<Player> &turnOrder) : board(board), dictionary(dictionary), turn_order(turnOrder) {}
-
 Game::Game() {}
 
-const std::hash_map<std::string, std::string> &Game::getDictionary() const {
+const std::map<std::string, bool> &Game::getDictionary() const {
     return dictionary;
 }
 
-void Game::setDictionary(const std::hash_map<std::string, std::string> &dictionary) {
+void Game::setDictionary(const std::map<std::string, bool> &dictionary) {
     Game::dictionary = dictionary;
 }
 
@@ -26,12 +23,12 @@ void Game::setTurnOrder(const std::queue<Player> &turnOrder) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Game &game) {
-    os << "board: " << game.board << " turn_order: " << game.turn_order;
+    os << "board: " << game.board << " turn_order: " << game.turn_order.size();
     return os;
 }
 
 void Game::parseDictionary(std::string file_name) {
-    auto *tmpWord = new std::string;
+    std::string tmpWord;
 
     std::ifstream file(file_name, std::ios::in);
 
@@ -40,11 +37,38 @@ void Game::parseDictionary(std::string file_name) {
     }
 
     while(file.good()){
-        std::getline(file, *tmpWord, '\n');
-        //TODO insert into has map
+        getline(file, tmpWord, '\n');
+        dictionary[tmpWord] = true;
     }
 
     file.close();
+}
+
+void Game::start(int player_amount) {
+    std::vector<Player> player_selection_vector;
+    for (int i = 0; i < player_amount; i++) {
+        player_selection_vector.push_back(Player());
+        for (int j = 0; j < 6; i++) {
+            player_selection_vector[i].getTiles()[j] = 'a' + rand()%26;
+        }
+    }
+    for (int i = player_amount; i >= 0; i--) {
+        int num = rand()%i;
+        turn_order.push(player_selection_vector[num]);
+        player_selection_vector.erase(player_selection_vector.begin() + num);
+    }
+}
+
+void Game::end() {
+
+}
+
+void Game::turn() {
+
+}
+
+bool Game::verify() {
+    return false;
 }
 
 
