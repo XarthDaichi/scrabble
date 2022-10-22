@@ -27,3 +27,11 @@ char Player::operator[](int position) {
         std::clog << "Position is outside of vector length, enter a value between 0-5";
     }
 }
+
+int Player::getNumber() const {
+    return number;
+}
+
+void Player::setNumber(int number) {
+    Player::number = number;
+}

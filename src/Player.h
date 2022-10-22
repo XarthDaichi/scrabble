@@ -10,11 +10,16 @@
 
 class Player {
 private:
+    int number;
     char tiles[6]{};
 public:
     Player();
 
     char *getTiles();
+
+    int getNumber() const;
+
+    void setNumber(int number);
 
     friend std::ostream &operator<<(std::ostream &os, const Player &player);
     char operator[](int position);

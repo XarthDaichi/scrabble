@@ -42,13 +42,15 @@ public:
 
     void start(int player_amount);
 
-    void end();
+    bool end(Player& player);
 
     void turn();
 
     bool verify();
 
-    void draw_tiles(int amount);
+    bool winConditions(Player& currentPlayer);
+
+//    void draw_tiles(int amount);
 };
 
 

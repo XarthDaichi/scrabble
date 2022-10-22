@@ -50,6 +50,7 @@ void Game::start(int player_amount) {
         player_selection_vector.push_back(Player());
         for (int j = 0; j < 6; i++) {
             player_selection_vector[i].getTiles()[j] = 'a' + rand()%26;
+            player_selection_vector[i].setNumber(i+1);
         }
     }
     for (int i = player_amount; i >= 0; i--) {
@@ -59,15 +60,34 @@ void Game::start(int player_amount) {
     }
 }
 
-void Game::end() {
-
+bool Game::end(Player& player) {
+    std::cout << "Congratulations " << player.getNumber() << "!!!\n";
+    std::cout << "You win!!!\n\n";
+    std::cout << "Play again (1 for yes | 0 for no): ";
+    int selection;
+    std::cin >> selection;
+    return selection != 0;
 }
 
 void Game::turn() {
+    /*
+     * do {
+     *
+     * } while(!verify)
+     */
+}
 
+bool Game::winConditions(Player& currentPlayer) {
+    /*
+     *  verificar que el jugador ya no tiene letras
+     *  no tiene posibilidad de hacer ninguna otra palabra, gana el que tiene la menor cantidad de letras
+     *  si los ultimos dos son falsos gana el que tenga la suma de letras menor, hacer por ASCII
+     */
+    return false;
 }
 
 bool Game::verify() {
+    // verify that the whole matrix has no invalid words
     return false;
 }
 
