@@ -30,4 +30,21 @@ std::ostream &operator<<(std::ostream &os, const Game &game) {
     return os;
 }
 
+void Game::parseDictionary(std::string file_name) {
+    auto *tmpWord = new std::string;
+
+    std::ifstream file(file_name, std::ios::in);
+
+    if(!file.is_open()){
+        throw std::invalid_argument("Could not open the file [" + file_name + "]");
+    }
+
+    while(file.good()){
+        std::getline(file, *tmpWord, '\n');
+        //TODO insert into has map
+    }
+
+    file.close();
+}
+
 
