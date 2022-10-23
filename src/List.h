@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <cstddef>
+#include "Node.h"
 
 // Autor: El Tigre
 // Descripci�n: Definici�n de una lista enlazada simple
@@ -16,16 +17,9 @@ template<class T> class List {
 private:
     // Declaraci�n de cada nodo de la lista: contiene el valor y un apuntador a un nodo
     // Queda oculto para el usuario
-    struct Node {
-        T value;
-        Node* right;
-        Node* below;
-        // Constructor del Node - asigna NULL si se invoca sin el segundo par�metro
-        Node(T val, Node* right = nullptr, Node* below = nullptr) : value{ val }, right{ right }, below{ below } {}
-    };
 
     // Apuntador al inicio de la lista
-    Node* start;
+    Node<T>* start;
 
     void Initialize() { start = nullptr; }
 
@@ -33,8 +27,8 @@ private:
 public:
 
     // Declaraci�n de definici�n de tipos
-    typedef Node* listptr;
-    typedef const Node* const_listptr;
+    typedef Node<T>* listptr;
+    typedef const Node<T>* const_listptr;
 
     // Constructores
     // Default
@@ -44,11 +38,11 @@ public:
         if (obj.start == nullptr)
             start = nullptr;
         else {
-            start = new Node(obj.start->valor);
+            start = new Node<T>(obj.start->valor);
             listptr current = start;
             listptr currentObj = obj.start->next;
             while (currentObj != nullptr) {
-                current->next = new Node(currentObj->valor);
+                current->next = new Node<T>(currentObj->valor);
                 current = current->next;
                 currentObj = currentObj->next;
             }
@@ -69,7 +63,7 @@ public:
         listptr newNode;
 
         try {
-            newNode = new Node(val);
+            newNode = new Node<T>(val);
         }
         catch (std::bad_alloc exception) {
             return;

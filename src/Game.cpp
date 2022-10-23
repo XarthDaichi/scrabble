@@ -4,7 +4,13 @@
 
 #include "Game.h"
 
-Game::Game() {}
+Game::Game() {
+    for (size_t i = 0; i < 10; i++) {
+        for (size_t j = 0; j < 10; j++) {
+            board[i][j] = new Node<char>(' ');
+        }
+    }
+}
 
 const std::map<std::string, bool> &Game::getDictionary() const {
     return dictionary;
@@ -23,17 +29,26 @@ void Game::setTurnOrder(const std::queue<Player> &turnOrder) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Game &game) {
-    os << "board: " << game.board << " turn_order: " << game.turn_order.size();
+    os << "board: \n";
+    for (size_t i = 0; i < 10; i++) {
+        os << " _ _ _ _ _ _ _ _ _ _\n|";
+        for (size_t j = 0; j < 10; j++) {
+            os << game.board[i][j]->value << "|";
+        }
+        os << '\n';
+    }
+    os << " _ _ _ _ _ _ _ _ _ \n";
+    os << " turn_order: " << game.turn_order.size();
     return os;
 }
 
-void Game::parseDictionary(std::string file_name) {
+void Game::parseDictionary(std::string fileName) {
     std::string tmpWord;
 
-    std::ifstream file(file_name, std::ios::in);
+    std::ifstream file(fileName, std::ios::in);
 
     if(!file.is_open()){
-        throw std::invalid_argument("Could not open the file [" + file_name + "]");
+        throw std::invalid_argument("Could not open the file [" + fileName + "]");
     }
 
     while(file.good()){
@@ -90,5 +105,4 @@ bool Game::verify() {
     // verify that the whole matrix has no invalid words
     return false;
 }
-
 
