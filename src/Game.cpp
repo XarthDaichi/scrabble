@@ -63,7 +63,7 @@ void Game::start(int player_amount) {
     std::vector<Player> player_selection_vector;
     for (int i = 0; i < player_amount; i++) {
         player_selection_vector.push_back(Player());
-        for (int j = 0; j < 6; i++) {
+        for (int j = 0; j < 6; j++) {
             player_selection_vector[i].getTiles()[j] = 'a' + rand()%26;
             player_selection_vector[i].setNumber(i+1);
         }
@@ -76,7 +76,7 @@ void Game::start(int player_amount) {
 }
 
 bool Game::end(Player& player) {
-    std::cout << "Congratulations " << player.getNumber() << "!!!\n";
+    std::cout << "Congratulations player " << player.getNumber() << "!!!\n";
     std::cout << "You win!!!\n\n";
     std::cout << "Play again (1 for yes | 0 for no): ";
     int selection;
