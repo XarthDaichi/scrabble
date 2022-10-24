@@ -1,7 +1,3 @@
-//
-// Created by Xarthy on 0019 October 19, 2022.
-//
-
 #include <iostream>
 #include "Player.h"
 

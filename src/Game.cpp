@@ -1,7 +1,3 @@
-//
-// Created by Xarthy on 0019 October 19, 2022.
-//
-
 #include "Game.h"
 
 Game::Game() {
@@ -95,7 +91,6 @@ bool Game::end(Player& player) {
 }
 
 bool Game::verifyBoard() {
-    //TODO verificar si esta bien con el mapa
     std::string testing_word;
     bool right = false, down = false;
     for (size_t i = 0; i < 11; i++) {
@@ -179,10 +174,6 @@ bool Game::runGame() {
     int x, y, direction;
     Player* currentPlayer;
 
-
-    //TODO verificacion de interseccion (por insertar palabra)
-    //TODO hacer la verificacion de insertar para ver si la palabra existe en el map
-
     do{
         system("cls");
         Sleep(1000);
@@ -228,11 +219,6 @@ bool Game::runGame() {
                 if (firstTurn && insertFail) firstTurn = false;
                 break;
 
-            case 2:
-                //TODO Llamar metodo de extender palabra
-
-                //TODO [agregar a palabra, parametros]: caracteres a agregar, inicio o final (Modalidad),
-                // posicion a insertar inico/final(direccion en matriz), direccion(verificacion cardinal en direccion en matriz)
                 if (firstTurn)  {
                     std::cout << "No words to add to!!!\n";
                     break;

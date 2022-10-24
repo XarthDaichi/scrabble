@@ -1,7 +1,3 @@
-//
-// Created by Xarthy on 0019 October 19, 2022.
-//
-
 #ifndef SCRABBLE_GAME_H
 #define SCRABBLE_GAME_H
 #include "List.h"

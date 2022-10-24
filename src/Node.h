@@ -1,7 +1,3 @@
-//
-// Created by Xarthy on 0022 October 22, 2022.
-//
-
 #ifndef SCRABBLE_NODE_H
 #define SCRABBLE_NODE_H
 
