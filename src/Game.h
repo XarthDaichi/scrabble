@@ -7,6 +7,7 @@
 #include "List.h"
 #include "Player.h"
 #include "enum.h"
+#include <Windows.h>
 #include <vector>
 #include <queue>
 // Para verificar algunas cosas de los mapas usamos: https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/
@@ -26,15 +27,9 @@ private:
     List<char>::listptr board[11][11]; // Node * board[10][10]
     std::map<std::string, bool> dictionary;
     std::queue<Player*> turnOrder;
-
-    //TODO verificar si necesitamos los vectores siguientes al final
-//    std::vector<List<char>::listptr> rightWords;
-//    std::vector<List<char>::listptr> downWords;
+    std::vector<char> letters = {'a','e','i','o','u','c','h','b','d','s','l','p','t','j','m'};
 
 public:
-    //TODO metodo ingresar palabra con verificacion primer turno, direccion, si se pone paralela a otra palabra que esta tambien exista en el diccionario, conectar nodos
-    //TODO cambiar palabra
-
     Game();
 
     const std::map<std::string, bool> &getDictionary() const;
@@ -51,24 +46,19 @@ public:
 
     std::string parseWord(List<char>::listptr, Direction direction);
 
-    void start(int playerAmount);
+    bool start(int playerAmount);
 
     bool end(Player& player);
 
     bool verifyBoard();
 
-    //TODO verifica existencia de la palabra en el map
-    //TODO if primer turno no verificar interseccion
     bool insertWord(std::string palabra, int x, int y, Direction direction,  bool firstTurn);
 
-    void eliminateInsertion();
-
-    //TODO verifica existencia del caracter en posicion y si la direccion escogida no tiene ningun problema
-    int verifyIntersection(const std::string& palabra, int x, int y, Direction direction);
+    int verifyIntersection(const std::string& palabra, int x, int y);
 
     Player* determineTie(std::queue<Player*> players);
 
-    void runGame();
+    bool runGame();
 };
 
 

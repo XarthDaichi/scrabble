@@ -13,7 +13,7 @@ std::vector<char> &Player::getTiles(){
 
 std::ostream &operator<<(std::ostream &os, const Player &player) {
     os << player.name << ": tiles: ";
-    for (auto i: player.tiles) { os << i << ' | '; }
+    for (auto i: player.tiles) { os << i << " | ";}
     return os;
 }
 
