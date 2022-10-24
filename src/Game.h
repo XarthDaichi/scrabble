@@ -6,6 +6,8 @@
 #define SCRABBLE_GAME_H
 #include "List.h"
 #include "Player.h"
+#include "enum.h"
+#include <vector>
 #include <queue>
 // Para verificar algunas cosas de los mapas usamos: https://www.geeksforgeeks.org/map-associative-containers-the-c-standard-template-library-stl/
 #include <map>
@@ -19,11 +21,19 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-struct Game {
-    List<char>::listptr board[10][10]; // Node * board[10][10]
+class Game {
+private:
+    List<char>::listptr board[11][11]; // Node * board[10][10]
     std::map<std::string, bool> dictionary;
-    std::queue<Player> turn_order;
-    int tile_amount[26] = {9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1};
+    std::queue<Player*> turnOrder;
+
+    //TODO verificar si necesitamos los vectores siguientes al final
+//    std::vector<List<char>::listptr> rightWords;
+//    std::vector<List<char>::listptr> downWords;
+
+public:
+    //TODO metodo ingresar palabra con verificacion primer turno, direccion, si se pone paralela a otra palabra que esta tambien exista en el diccionario, conectar nodos
+    //TODO cambiar palabra
 
     Game();
 
@@ -31,25 +41,34 @@ struct Game {
 
     void setDictionary(const std::map<std::string, bool> &dictionary);
 
-    const std::queue<Player> &getTurnOrder() const;
+    const std::queue<Player*> &getTurnOrder() const;
 
-    void setTurnOrder(const std::queue<Player> &turnOrder);
+    void setTurnOrder(const std::queue<Player*> &turnOrder);
 
     friend std::ostream &operator<<(std::ostream &os, const Game &game);
 
-    void parseDictionary(std::string file_name);
+    void parseDictionary(std::string fileName);
 
-    void start(int player_amount);
+    std::string parseWord(List<char>::listptr, Direction direction);
+
+    void start(int playerAmount);
 
     bool end(Player& player);
 
-    void turn();
+    bool verifyBoard();
 
-    bool verify();
+    //TODO verifica existencia de la palabra en el map
+    //TODO if primer turno no verificar interseccion
+    bool insertWord(std::string palabra, int x, int y, Direction direction,  bool firstTurn);
 
-    bool winConditions(Player& currentPlayer);
+    void eliminateInsertion();
 
-//    void draw_tiles(int amount);
+    //TODO verifica existencia del caracter en posicion y si la direccion escogida no tiene ningun problema
+    int verifyIntersection(const std::string& palabra, int x, int y, Direction direction);
+
+    Player* determineTie(std::queue<Player*> players);
+
+    void runGame();
 };
 
 

@@ -5,21 +5,21 @@
 #ifndef SCRABBLE_PLAYER_H
 #define SCRABBLE_PLAYER_H
 
-
+#include <vector>
 #include <ostream>
 
 class Player {
 private:
-    int number;
-    char tiles[6]{};
+    std::string name;
+    std::vector<char> tiles;
 public:
     Player();
 
-    char *getTiles();
+    std::vector<char> &getTiles();
 
-    int getNumber() const;
+    std::string getName() const;
 
-    void setNumber(int number);
+    void setName(std::string name);
 
     friend std::ostream &operator<<(std::ostream &os, const Player &player);
     char operator[](int position);

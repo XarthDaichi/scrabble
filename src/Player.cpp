@@ -5,18 +5,15 @@
 #include <iostream>
 #include "Player.h"
 
-Player::Player() {
-    for (size_t i = 0; i < 6; i++) {
-        tiles[i] = ' ';
-    }
-}
+Player::Player() {}
 
-char *Player::getTiles() {
+std::vector<char> &Player::getTiles(){
     return tiles;
 }
 
 std::ostream &operator<<(std::ostream &os, const Player &player) {
-    os << "tiles: " << player.tiles;
+    os << player.name << ": tiles: ";
+    for (auto i: player.tiles) { os << i << ' | '; }
     return os;
 }
 
@@ -28,10 +25,10 @@ char Player::operator[](int position) {
     }
 }
 
-int Player::getNumber() const {
-    return number;
+std::string Player::getName() const {
+    return name;
 }
 
-void Player::setNumber(int number) {
-    Player::number = number;
+void Player::setName(std::string name) {
+    Player::name = name;
 }

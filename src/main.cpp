@@ -2,23 +2,38 @@
 #include "Player.h"
 #include "List.h"
 #include "Game.h"
+
+
 int main() {
-
-
     //initializing random
     srand(time(NULL));
-
+    size_t option;
     Game game;
-    game.parseDictionary("dictionary.txt");
 
-    // this is verifying that the parsing works
-//    for (auto i : game.getDictionary()) {
-//        // Para revisar como sirve pairs usamos: https://www.geeksforgeeks.org/pair-in-cpp-stl/
-//        std::cout << i.first << '\n';
-//    }
+    std::cout << game;
+    std::cout << '\n';
+    std::cout << "Welcome to Scrabble!" << '\n';
+    std::cout << "  1) Start" << '\n';
+    std::cout << "  2) Quit" << '\n';
+    std::cout << "Select an option: " << '\n'; std::cin >> option;
 
-    std::cout << game << '\n';
-    game.board[0][0]->value = 'a';
-    std::cout << game << '\n';
+    switch (option) {
+        case 1:
+            int quantityPlayers;
+            game.parseDictionary("dictionary.txt");
+            std::cout << '\n';
+            std::cout << "How many players are there? " << '\n'; std::cin >> quantityPlayers;
+            game.start(quantityPlayers);
+            break;
+        case 2:
+            break;
+        default:
+            std::cout << "Invalid number." << '\n';
+    }
+
+
+//    std::map<std::string, bool> test;
+//    test["something"] = true;
+//    std::cout << test["other"]; si da negativo
     return 0;
 }

@@ -8,9 +8,9 @@
 template<class T> struct Node {
     T value;
     Node* right;
-    Node* below;
+    Node* down;
     // Constructor del Node - asigna NULL si se invoca sin el segundo par�metro
-    Node(T val, Node* right = nullptr, Node* below = nullptr) : value{ val }, right{ right }, below{ below } {}
+    Node(T val, Node* right = nullptr, Node* down = nullptr) : value{ val }, right{ right }, down{ down } {}
 };
 
 #endif //SCRABBLE_NODE_H

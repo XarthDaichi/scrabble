@@ -59,7 +59,7 @@ public:
     listptr GetFirstNode() const { return start; }
 
     // Inserta un elemento al final de la lista enlazada
-    void Insert(const T& val) {
+    void InsertRight(const T& val) {
         listptr newNode;
 
         try {
@@ -74,6 +74,26 @@ public:
         else {
             listptr tmp = start;
             while (tmp->right != nullptr)
+                tmp = tmp->right;
+            tmp->next = start;
+        }
+    }
+
+    void InsertDown(const T& val) {
+        listptr newNode;
+
+        try {
+            newNode = new Node<T>(val);
+        }
+        catch (std::bad_alloc exception) {
+            return;
+        }
+
+        if (start == nullptr)
+            start = newNode;
+        else {
+            listptr tmp = start;
+            while (tmp->down != nullptr)
                 tmp = tmp->right;
             tmp->next = start;
         }
